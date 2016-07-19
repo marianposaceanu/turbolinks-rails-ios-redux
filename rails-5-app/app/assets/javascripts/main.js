@@ -1,5 +1,7 @@
-$(function() {
-  $("a.api-call").click(function(event) {
+$(document).on("turbolinks:load", function() {
+  $("#api-response").html();
+
+  $("a.api-call").on("click", function(event) {
     event.preventDefault();
 
     $.get(this.href, function(data) {
@@ -11,4 +13,8 @@ $(function() {
     });
 
   });
+});
+
+$(document).on("turbolinks:render", function() {
+  $("#api-response").html("");
 });
