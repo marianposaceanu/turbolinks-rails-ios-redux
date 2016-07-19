@@ -1,3 +1,3 @@
-log/*
-tmp/*
+rails-5-app/log/*
+rails-5-app/tmp/*
 .DS_Store
