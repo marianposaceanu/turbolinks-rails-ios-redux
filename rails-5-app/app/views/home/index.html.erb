@@ -1,29 +1,45 @@
-    <div class="container">
-      <%= render partial: 'nav' %>
+<div class="container">
+  <hr />
 
-      <hr />
+  <%= render partial: 'nav' %>
 
-      <div class="row">
-        <h1>Simple API prototype</h2>
-      </div>
+  <hr />
 
-      <hr />
+  <div class="row">
+    <div class="column">
+      <h2>UI prototype</h2>
+    </div>
+  </div>
 
-      <!-- Section -->
+  <div class="row">
+    <div class="column">
+      <p><b>
+        This is a "classic" Rails 5 web app that makes an internal API call.
+      </b></p>
+    </div>
+  </div>
 
-      <div class="row">
-        <h4>Fire an API call</h4>
-      </div>
-      <div class="row">
-        <p><i>Endpoint: ' GET /entities'</i></p>
-      </div>
+  <!-- Section -->
 
-      <div class="row">
-        <a class="button api-call" href="/entities">Call</a>
-      </div>
+  <div class="row">
+  </div>
 
-      <hr />
+  <div class="row">
+    <div class="column">
+      <p><i>Fire an API call: ' GET /entities'</i></p>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="column">
+      <a class="button api-call" href="/entities">Call</a>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="column">
       <form>
         <fieldset>
           <label for="api-response">API Response</label>
@@ -31,3 +47,5 @@
         </fieldset>
       </form>
     </div>
+  </div>
+</div>

@@ -1,5 +1,13 @@
       <div class="row">
+        <div class="column">
         <nav>
-          <a class="" href="/faq">FAQ</a>
+          <% if action_name == 'index' %>
+            <a class="" href="/faq">FAQ</a>
+          <% end %>
+
+          <% if action_name == 'faq' %>
+            <a class="" href="/">Home</a>
+          <% end %>
         </nav>
+        </div>
       </div>

@@ -1,3 +1,9 @@
 class HomeController < ApplicationController
-  def faq; end
+  def index
+    @title = 'Home'
+  end
+
+  def faq
+    @title = 'FAQ'
+  end
 end

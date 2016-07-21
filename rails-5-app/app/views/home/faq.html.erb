@@ -1,17 +1,116 @@
-    <div class="container">
-      <%= render partial: 'nav' %>
+<div class="container">
+  <hr />
 
-      <hr />
+  <%= render partial: 'nav' %>
 
-      <div class="row">
-        <h1>FAQ</h2>
-      </div>
+  <hr />
 
-      <hr />
-
-      <!-- Section -->
-
-      <div class="row">
-        <p><i>The Session class is the central coordinator in a Turbolinks for iOS application.</i></p>
-      </div>
+  <div class="row">
+    <div class="column">
+      <h2>FAQ</h2>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <p><b>
+        What is the minimal Swift code to run the iOS app via Turbolinks?
+      </b></p>
+    </div>
+  </div>
+
+  <!-- Section -->
+
+  <div class="row">
+    <div class="column">
+      <pre><code>
+import UIKit
+import WebKit
+import Turbolinks
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    var navigationController = UINavigationController()
+    lazy var session: Session = {
+        let configuration = WKWebViewConfiguration()
+        configuration.applicationNameForUserAgent = "Turbolinks 5 Demo"
+        return Session(webViewConfiguration: configuration)
+    }()
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        window?.rootViewController = navigationController
+        session.delegate = self
+        
+        startApplication()
+        
+        return true
+    }
+    
+    func startApplication() {
+        visit(NSURL(string: "http://localhost:3000")!)
+    }
+    
+    func visit(URL: NSURL) {
+        let visitableViewController = VisitableViewController(URL: URL)
+        navigationController.pushViewController(visitableViewController, animated: true)
+        session.visit(visitableViewController)
+    }
+  }
+
+extension AppDelegate: SessionDelegate {
+    func session(session: Session, didProposeVisitToURL URL: NSURL, withAction action: Action) {
+        visit(URL)
+    }
+    
+    func session(session: Session, didFailRequestForVisitable visitable: Visitable, withError error: NSError) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        navigationController.presentViewController(alert, animated: true, completion: nil)
+    }
+}
+      </code></pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <h4>Some random data</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <p>
+      <i>
+        Build high-fidelity hybrid apps with native navigation and a single shared web view. Turbolinks for iOS provides the tooling to wrap your Turbolinks 5-enabled web app in a native iOS shell. It manages a single WKWebView instance across multiple view controllers, giving you native navigation UI with all the client-side performance benefits of Turbolinks.
+      </i>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stephen Curry</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>Klay Thompson</td>
+            <td>25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
