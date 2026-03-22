@@ -1,20 +1,47 @@
-$(document).on("turbolinks:load", function() {
-  $("#api-response").html();
+function clearApiResponse() {
+  var responseField = document.getElementById("api-response");
 
-  $("a.api-call").on("click", function(event) {
-    event.preventDefault();
+  if (responseField) {
+    responseField.value = "";
+  }
+}
 
-    $.get(this.href, function(data) {
-      console.log(data);
+function bindApiCalls() {
+  var responseField = document.getElementById("api-response");
+  var apiLinks = document.querySelectorAll("a.api-call");
 
-      var pretty_json = JSON.stringify(data, undefined, 4);
+  if (!responseField || apiLinks.length === 0) {
+    return;
+  }
 
-      $("#api-response").html(pretty_json);
-    });
+  clearApiResponse();
 
+  apiLinks.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+
+      fetch(link.href, {
+        headers: {
+          Accept: "application/json"
+        },
+        credentials: "same-origin"
+      })
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error("Request failed: " + response.status);
+          }
+
+          return response.json();
+        })
+        .then(function(data) {
+          responseField.value = JSON.stringify(data, null, 4);
+        })
+        .catch(function(error) {
+          responseField.value = error.message;
+        });
+    }, { once: true });
   });
-});
+}
 
-$(document).on("turbolinks:render", function() {
-  $("#api-response").html("");
-});
+document.addEventListener("turbolinks:load", bindApiCalls);
+document.addEventListener("turbolinks:render", clearApiResponse);
