@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.2', '>= 7.2.3'
+gem 'rails', '~> 7.2', '>= 7.2.3.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '>= 2.9.6'
 # Use Puma as the app server
-gem 'puma', '~> 6.6', '>= 6.6.1'
+gem 'puma', '~> 7.2', '>= 7.2.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,7 +30,7 @@ gem 'ostruct'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'nokogiri', '>= 1.19.2'
+gem 'nokogiri', '>= 1.19.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
